@@ -1,4 +1,4 @@
-package ch.module.cardgame.cards;
+package ch.module.cardgame.card;
 
 import jdk.jfr.Label;
 import org.junit.Assert;
