@@ -2,12 +2,13 @@ package ch.module.cardgame.player;
 
 public class Player {
     private PlayerStats stats;
+    private PlayerHand hand;
     //TODO: Add CardDeck here
-    //TODO: Add PlayerHand here
     //TODO: Add PlayerPlayFieldMediator
 
     public Player() {
         this.stats = new PlayerStats();
+        this.hand = new PlayerHand();
     }
 
     public void endTurn() {
@@ -17,4 +18,6 @@ public class Player {
     public PlayerStats getStats() {
         return stats;
     }
+
+
 }
