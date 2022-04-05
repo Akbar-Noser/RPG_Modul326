@@ -21,6 +21,8 @@ public class PlayerStats {
      * @return New health value after subtraction.
      */
     public int decrementHealthBy(int valueToSubtract) {
+        if (health - valueToSubtract < 0)
+            return 0;
         health -= valueToSubtract;
         return health;
     }
@@ -33,6 +35,8 @@ public class PlayerStats {
      * @return New health value after addition.
      */
     public int incrementHealthBy(int valueToAdd) {
+        if (health + valueToAdd > MAX_HEALTH)
+            return MAX_HEALTH;
         health += valueToAdd;
         return health;
     }
@@ -45,6 +49,8 @@ public class PlayerStats {
      * @return New energy value after subtraction
      */
     public int decrementEnergyBy(int valueToSubtract) {
+        if (energy - valueToSubtract < 0)
+            return 0;
         energy -= valueToSubtract;
         return energy;
     }
@@ -57,6 +63,8 @@ public class PlayerStats {
      * @return New energy value after addition.
      */
     public int incrementEnergyBy(int valueToAdd) {
+        if (energy + valueToAdd > MAX_ENERGY)
+            return MAX_ENERGY;
         energy += valueToAdd;
         return energy;
     }
