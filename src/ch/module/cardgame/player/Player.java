@@ -4,7 +4,7 @@ public class Player {
     private PlayerStats stats;
     private PlayerHand hand;
     //TODO: Add CardDeck here
-    //TODO: Add PlayerPlayFieldMediator
+    private PlayerPlayFieldMediator playerPlayFieldMediator;
 
     public Player() {
         this.stats = new PlayerStats();
@@ -12,7 +12,7 @@ public class Player {
     }
 
     public void endTurn() {
-        //TODO: Call PlayerPlayFieldMediator here
+        playerPlayFieldMediator.endTurn();
     }
 
     public PlayerStats getStats() {
