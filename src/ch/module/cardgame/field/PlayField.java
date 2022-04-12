@@ -39,6 +39,20 @@ public class PlayField {
     }
 
     /**
+     * Attack Method which delegates the attack to the corresponding card field mediator and for all.
+     *
+     * @param attacker        Current player attacking
+     * @param defender        Player receiving the attack.
+     */
+    public int attackAllOppositeFields(Player attacker, Player defender) {
+        int damageSum = 0;
+        for (int i = 0; i < MAX_AMOUNT_CARD_FIELDS; i++) {
+            damageSum += attackOppositeField(attacker, defender, i);
+        }
+        return damageSum;
+    }
+
+    /**
      * Retrieves the play field singleton instance.
      *
      * @return              this objects instance

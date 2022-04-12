@@ -1,7 +1,7 @@
 package ch.module.cardgame;
 
 import ch.module.cardgame.player.Player;
-import ch.module.cardgame.player.PlayerPlayFieldMediator;
+import ch.module.cardgame.mediator.PlayerPlayFieldMediator;
 
 public class Main {
 
