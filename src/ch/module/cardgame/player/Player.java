@@ -1,5 +1,7 @@
 package ch.module.cardgame.player;
 
+import ch.module.cardgame.mediator.PlayerPlayFieldMediator;
+
 public class Player {
     private PlayerStats stats;
     private PlayerHand hand;
