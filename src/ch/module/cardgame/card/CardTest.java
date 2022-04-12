@@ -1,8 +1,10 @@
 package ch.module.cardgame.card;
 
 import jdk.jfr.Label;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class CardTest {
 
@@ -15,20 +17,20 @@ class CardTest {
     @Test
     void compareHealthpoints() {
         Card testCard = new CardBuilder().setHealthPoints(TEST_HEALTHPOINTS).build();
-        Assert.assertEquals(TEST_HEALTHPOINTS, testCard.getHealthPoints());
+        assertEquals(TEST_HEALTHPOINTS, testCard.getHealthPoints());
     }
 
     @Label("Comparing card summon energy - expecting: true")
     @Test
     void compareCardObject() {
         Card testCard = new CardBuilder().setSummonEnergyPoints(TEST_SUMMONENERGYPOINTS).build();
-        Assert.assertEquals(TEST_SUMMONENERGYPOINTS, testCard.getSummonEnergyPoints());
+        assertEquals(TEST_SUMMONENERGYPOINTS, testCard.getSummonEnergyPoints());
     }
 
     @Label("Comparing false card attack points - expecting: false")
     @Test
     void compareFalseAttackPoints() {
         Card testCard = new CardBuilder().setHealthPoints(TEST_HEALTHPOINTS).setAttackPoints(TEST_ATTACKPOINTS_FALSE).build();
-        Assert.assertNotEquals(TEST_ATTACKPOINTS, testCard.getAttackPoints());
+        assertNotEquals(TEST_ATTACKPOINTS, testCard.getAttackPoints());
     }
 }
