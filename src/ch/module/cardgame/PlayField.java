@@ -29,6 +29,16 @@ public class PlayField {
     }
 
     /**
+     * Attack Method which delegates the attack to the corresponding card field mediator and for all.
+     *
+     * @param player        Current player attacking
+     */
+    public int attackAllOppositeFields(Player player) {
+        //TODO use player as Key for Hashmap
+        return 0;
+    }
+
+    /**
      * Retrieves the play field singleton instance.
      *
      * @return              this objects instance
