@@ -1,6 +1,7 @@
-package ch.module.cardgame.player;
+package ch.module.cardgame.mediator;
 
 
+import ch.module.cardgame.player.Player;
 
 /**
  * Mediator class following the GoF Mediator pattern. It constitutes as an intersection between the play field and an actual player
