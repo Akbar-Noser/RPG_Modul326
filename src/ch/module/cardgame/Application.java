@@ -1,8 +1,8 @@
 package ch.module.cardgame;
 
 import ch.module.cardgame.graphics.Board;
+import ch.module.cardgame.mediator.PlayerPlayFieldMediator;
 import ch.module.cardgame.player.Player;
-import ch.module.cardgame.player.PlayerPlayFieldMediator;
 import jdk.jfr.Event;
 
 import javax.swing.*;
