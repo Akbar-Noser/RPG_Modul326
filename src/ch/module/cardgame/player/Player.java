@@ -28,6 +28,10 @@ public abstract class Player {
             hand.addToHand(deck.popTopCard());
     }
 
+    public PlayerPlayFieldMediator getPlayerPlayFieldMediator() {
+        return playerPlayFieldMediator;
+    }
+
     /**
      * The player plays a card
      *

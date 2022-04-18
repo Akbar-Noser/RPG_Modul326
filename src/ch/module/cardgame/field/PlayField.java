@@ -79,6 +79,14 @@ public class PlayField {
         return true;
     }
 
+    public Map<Player, List<CardField>> getCardFields() {
+        return cardFields;
+    }
+
+    public static int getMaxAmountCardFields() {
+        return MAX_AMOUNT_CARD_FIELDS;
+    }
+
     /**
      * Retrieves the play field singleton instance.
      *

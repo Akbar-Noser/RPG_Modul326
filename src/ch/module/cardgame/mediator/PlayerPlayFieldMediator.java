@@ -2,8 +2,12 @@ package ch.module.cardgame.mediator;
 
 
 import ch.module.cardgame.card.Card;
+import ch.module.cardgame.card.CardField;
 import ch.module.cardgame.field.PlayField;
 import ch.module.cardgame.player.Player;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Mediator class following the GoF Mediator pattern. It constitutes as an intersection between the play field and an actual player
@@ -34,5 +38,13 @@ public class PlayerPlayFieldMediator {
         return successful;
     }
 
+    public Map<Player, List<CardField>> getPlayfield() {
+        return PlayField.getInstance().getCardFields();
+    }
 
+    public List<CardField> getEnemyPlayfield(Player initiator) {
+        if (initiator.equals(playerAI))
+            return PlayField.getInstance().getCardFields().get(playerUser);
+        return PlayField.getInstance().getCardFields().get(playerAI);
+    }
 }
