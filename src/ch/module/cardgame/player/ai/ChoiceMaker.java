@@ -1,5 +1,6 @@
 package ch.module.cardgame.player.ai;
 
+import ch.module.cardgame.card.Card;
 import ch.module.cardgame.card.CardField;
 import ch.module.cardgame.field.PlayField;
 import ch.module.cardgame.player.Player;
@@ -35,11 +36,16 @@ public class ChoiceMaker {
         return result;
     }
 
-    public Choice evaluateChoiceForField(CardField field, int targetIndex) {
-        //TODO: Create method to evaluate the possible playable card sets.
+    /*public Choice evaluateChoiceForField(CardField field, int targetIndex) {
+        //TODO: Create method to evaluate the possible playable card combinations.
 
         return new Choice(Map.of(field, targetIndex), );
     }
+
+    public List<List<Card>> getPlayableCardCombinations() {
+        List<List<Card>> result = new ArrayList<>();
+
+    }*/
 
     public List<Integer> getUnprotectedFieldIndices() {
         List<Integer> unprotectedFields = new ArrayList<>(PlayField.getMaxAmountCardFields());
