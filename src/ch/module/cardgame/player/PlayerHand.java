@@ -35,4 +35,8 @@ public class PlayerHand {
     public int getMAX_CARDS() {
         return MAX_CARDS;
     }
+
+    public List<Card> getCards() {
+        return cards;
+    }
 }

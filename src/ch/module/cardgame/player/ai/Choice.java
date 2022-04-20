@@ -5,19 +5,20 @@ import ch.module.cardgame.card.Card;
 import java.util.Map;
 
 public class Choice {
-    private Map<Card, Integer> cardsToBePlayed;
+    private Map<Integer, Card> cardsToBePlayed;
     private int requiredSummonEnergy;
     private int damageTakenByClient;
     private int amountOfEnemyCardsEliminated;
     private int damageDealtToEnemyCards;
     private int damageDealtToEnemy;
 
-    public Choice(Map<Card, Integer> cardsToBePlayed, int damageTakenByClient, int amountOfEnemyCardsEliminated, int damageDealtToEnemy) {
+    public Choice(Map<Integer, Card> cardsToBePlayed, int damageTakenByClient, int amountOfEnemyCardsEliminated, int damageDealtToEnemy) {
         this.cardsToBePlayed = cardsToBePlayed;
-        this.requiredSummonEnergy = cardsToBePlayed.keySet().stream().mapToInt(Card::getSummonEnergyPoints).sum();
+        this.requiredSummonEnergy = cardsToBePlayed.values().stream().mapToInt(Card::getSummonEnergyPoints).sum();
         this.damageTakenByClient = damageTakenByClient;
         this.amountOfEnemyCardsEliminated = amountOfEnemyCardsEliminated;
-        this.requiredSummonEnergy = cardsToBePlayed.keySet().stream().mapToInt(Card::getAttackPoints).sum();
+        this.requiredSummonEnergy = cardsToBePlayed.values().stream().mapToInt(Card::getAttackPoints).sum();
+
         this.damageDealtToEnemy = damageDealtToEnemy;
     }
 
@@ -29,7 +30,7 @@ public class Choice {
         return damageDealtToEnemyCards;
     }
 
-    public Map<Card, Integer> getCardsToBePlayed() {
+    public Map<Integer, Card> getCardsToBePlayed() {
         return cardsToBePlayed;
     }
 

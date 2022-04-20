@@ -59,6 +59,10 @@ public abstract class Player {
         return stats;
     }
 
+    public PlayerHand getHand() {
+        return hand;
+    }
+
     public void setPlayerPlayFieldMediator(PlayerPlayFieldMediator playerPlayFieldMediator) {
         this.playerPlayFieldMediator = playerPlayFieldMediator;
     }
