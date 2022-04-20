@@ -17,6 +17,9 @@ public class PlayerPlayFieldMediator {
     private Player playerUser;
     private Player playerAI;
 
+    public PlayerPlayFieldMediator() {
+    }
+
     public PlayerPlayFieldMediator(Player playerAI, Player playerUser) {
         this.playerAI = playerAI;
         this.playerUser = playerUser;
@@ -46,5 +49,13 @@ public class PlayerPlayFieldMediator {
         if (initiator.equals(playerAI))
             return PlayField.getInstance().getCardFields().get(playerUser);
         return PlayField.getInstance().getCardFields().get(playerAI);
+    }
+
+    public void setPlayerUser(Player playerUser) {
+        this.playerUser = playerUser;
+    }
+
+    public void setPlayerAI(Player playerAI) {
+        this.playerAI = playerAI;
     }
 }

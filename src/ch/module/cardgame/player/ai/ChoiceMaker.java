@@ -151,8 +151,8 @@ public class ChoiceMaker {
     public List<List<Card>> filterImpossibleCombinations(List<List<Card>> combinations) {
         long openFields = PlayField.getMaxAmountCardFields() - ownField.stream().filter(cardField -> cardField.getCard() != null).count();
         return combinations.stream().filter(cards ->
-                cards.stream().mapToInt(Card::getSummonEnergyPoints).sum() > client.getStats().getEnergy()
-                        || cards.size() > openFields).collect(Collectors.toList());
+                cards.stream().mapToInt(Card::getSummonEnergyPoints).sum() <= client.getStats().getEnergy()
+                        && cards.size() <= openFields).collect(Collectors.toList());
     }
 
     /**
@@ -219,5 +219,9 @@ public class ChoiceMaker {
 
     public boolean fieldIsUnprotected(CardField field, int index) {
         return field.getCard() != null && ownField.get(index).getCard() == null && field.getCard().getAttackPoints() > 0;
+    }
+
+    public void setFieldsToDefend(List<Integer> fieldsToDefend) {
+        this.fieldsToDefend = fieldsToDefend;
     }
 }
