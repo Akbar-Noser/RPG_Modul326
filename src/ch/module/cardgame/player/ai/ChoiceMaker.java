@@ -20,21 +20,114 @@ public class ChoiceMaker {
         this.ownField = client.getPlayerPlayFieldMediator().getPlayfield().get(client);
     }
 
-    /**
-     * Returns the choices which will result in the least amount of damage taken by the client. Returns null if there
-     * are no enemy cards that pose a threat.
-     *
-     * @return returns a list of choices or null if no enemy cards pose a threat.
-     */
-    public List<Choice> getChoicesWithMinimalDamageTaken() {
-        List<Choice> result = new ArrayList<>();
+
+    public Choice getOptimalChoice() {
         fieldsToDefend = getUnprotectedFieldIndices();
         if (fieldsToDefend.isEmpty())
             return null;
+        List<Choice> choices = new ArrayList<>(generateChoices());
+        choices = getChoicesWithMinimalDamageTaken(choices);
+        choices = getChoicesWithMaximumDamageDealt(choices);
+        choices = getChoicesWithMaximumOfEnemyCardsEliminated(choices);
+        choices = getChoicesWithMinimalAmountOfEnergySpent(choices);
+        return choices.get(0);
+    }
+
+    /**
+     * Returns the choices which will result in the least amount of damage taken by the client.
+     * Will return the same list as passed if the maximum amount of damage taken is 0.
+     *
+     * @param choices the choices which should be evaluated.
+     * @return returns a list of choices.
+     */
+    public List<Choice> getChoicesWithMinimalDamageTaken(List<Choice> choices) {
+        choices.sort(Comparator.comparing(Choice::getDamageTakenByClient));
+        if (choices.get(choices.size() - 1).getDamageTakenByClient() == 0)
+            return choices;
+        List<Choice> result = new ArrayList<>();
+        int lowestDamage = choices.get(0).getDamageTakenByClient();
+        result.add(choices.get(0));
+        int i = 1;
+        while (choices.get(i).getDamageTakenByClient() == lowestDamage) {
+            result.add(choices.get(i));
+            i++;
+        }
 
         return result;
     }
 
+    /**
+     * Returns the choices which will result in the least amount of energy spent by the client.
+     * Will return the same list as passed if the maximum amount of energy spent is 0.
+     *
+     * @param choices the choices which should be evaluated.
+     * @return returns a list of choices.
+     */
+    public List<Choice> getChoicesWithMinimalAmountOfEnergySpent(List<Choice> choices) {
+        choices.sort(Comparator.comparing(Choice::getRequiredSummonEnergy));
+        if (choices.get(choices.size() - 1).getRequiredSummonEnergy() == 0)
+            return choices;
+        List<Choice> result = new ArrayList<>();
+        int lowestEnergy = choices.get(0).getRequiredSummonEnergy();
+        result.add(choices.get(0));
+        int i = 1;
+        while (choices.get(i).getRequiredSummonEnergy() == lowestEnergy) {
+            result.add(choices.get(i));
+            i++;
+        }
+
+        return result;
+    }
+
+    /**
+     * Returns the choices which will result in the maximum amount of damage taken by the enemy.
+     * Will return the same list if the maximum amount of damage taken is 0.
+     *
+     * @param choices The choices which should be evaluated.
+     * @return the choices which will result in the highest amount of damage to the enemy.
+     */
+    public List<Choice> getChoicesWithMaximumDamageDealt(List<Choice> choices) {
+        choices.sort(Comparator.comparing(Choice::getDamageDealtToEnemy).reversed());
+        if (choices.get(0).getDamageDealtToEnemy() == 0)
+            return choices;
+        List<Choice> result = new ArrayList<>();
+        int highestDamage = choices.get(0).getDamageDealtToEnemy();
+        result.add(choices.get(0));
+        int i = 1;
+        while (choices.get(i).getDamageDealtToEnemy() == highestDamage) {
+            result.add(choices.get(i));
+            i++;
+        }
+        return result;
+    }
+
+    /**
+     * Will return the list of choices which will result in the most enemy cards eliminated.
+     * Will return the same list if the maximum is 0.
+     *
+     * @param choices the choices which should be evaluated
+     * @return the choices with the highest amount of enemy cards eliminated.
+     */
+    public List<Choice> getChoicesWithMaximumOfEnemyCardsEliminated(List<Choice> choices) {
+        choices.sort(Comparator.comparing(Choice::getAmountOfEnemyCardsEliminated).reversed());
+        if (choices.get(0).getAmountOfEnemyCardsEliminated() == 0)
+            return choices;
+        List<Choice> result = new ArrayList<>();
+        int highestDamage = choices.get(0).getAmountOfEnemyCardsEliminated();
+        result.add(choices.get(0));
+        int i = 1;
+        while (choices.get(i).getAmountOfEnemyCardsEliminated() == highestDamage) {
+            result.add(choices.get(i));
+            i++;
+        }
+        return result;
+    }
+
+    /**
+     * Generates all the possible choices which can be made.
+     *
+     * @return a linked list of all the choice objects.
+     */
     public List<Choice> generateChoices() {
         List<List<Card>> cardCombinations = CardCombinator.getUniqueCombinationsOfCards(client.getHand().getCards());
         cardCombinations = filterImpossibleCombinations(cardCombinations);
