@@ -1,6 +1,5 @@
 package ch.module.cardgame.player.ai;
 
-import ch.module.cardgame.field.PlayField;
 import ch.module.cardgame.mediator.PlayerPlayFieldMediator;
 import ch.module.cardgame.player.Player;
 
@@ -21,6 +20,7 @@ public class EnemyAi extends Player {
 
     private void makeChoice() {
         drawCard();
+        choiceMaker.getOptimalChoice().getCardsToBePlayed().forEach((index, card) -> playCard(card, index));
     }
 
     public ChoiceMaker getChoiceMaker() {
