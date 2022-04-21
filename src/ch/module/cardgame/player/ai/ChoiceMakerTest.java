@@ -2,6 +2,7 @@ package ch.module.cardgame.player.ai;
 
 import ch.module.cardgame.card.Card;
 import ch.module.cardgame.card.CardBuilder;
+import ch.module.cardgame.card.CardField;
 import ch.module.cardgame.field.PlayField;
 import ch.module.cardgame.mediator.PlayerPlayFieldMediator;
 import ch.module.cardgame.player.Player;
@@ -13,22 +14,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ChoiceMakerTest {
-    private ChoiceMaker choiceMaker;
+
     private PlayerPlayFieldMediator playerPlayFieldMediator = new PlayerPlayFieldMediator();
+    private Player user = new User(playerPlayFieldMediator);
     private Player ai = new EnemyAi(playerPlayFieldMediator);
-    private Player user = new User();
+    private ChoiceMaker choiceMaker = ((EnemyAi) ai).getChoiceMaker();
 
     @BeforeEach
     void setUp() {
-        playerPlayFieldMediator.setPlayerUser(user);
-        playerPlayFieldMediator.setPlayerAI(ai);
-        choiceMaker = new ChoiceMaker(ai);
-        choiceMaker.setFieldsToDefend(List.of(0,1,2,3,4));
-        PlayField.getInstance().registerPlayer(ai);
-        PlayField.getInstance().registerPlayer(user);
+        choiceMaker.setFieldsToDefend(List.of(0,1,2,3));
     }
 
     @Test
@@ -82,13 +79,36 @@ class ChoiceMakerTest {
 
     @Test
     void generateChoiceForCardPlacement() {
+        choiceMaker.setFieldsToDefend(List.of(0,1));
+        CardBuilder builder = new CardBuilder().setSummonEnergyPoints(3).setAttackPoints(3).setHealthPoints(2);
+        Card cardToBePlaced = builder.build();
+        ai.getPlayerPlayFieldMediator().getEnemyPlayfield(ai).get(0).setCard(builder.build());
+        ai.getPlayerPlayFieldMediator().getEnemyPlayfield(ai).get(1).setCard(builder.build());
+        Choice result = choiceMaker.generateChoiceForCardPlacement(Map.of(0, cardToBePlaced));
+        assertEquals(1, result.getAmountOfEnemyCardsEliminated());
+        assertEquals(0, result.getDamageDealtToEnemy());
+        assertEquals(3, result.getDamageTakenByClient());
+        assertEquals(Map.of(0, cardToBePlaced), result.getCardsToBePlayed());
+        assertEquals(3, result.getRequiredSummonEnergy());
+        assertEquals(3, result.getDamageDealtToEnemyCards());
     }
 
     @Test
     void getUnprotectedFieldIndices() {
+        CardBuilder builder = new CardBuilder().setSummonEnergyPoints(3).setAttackPoints(3).setHealthPoints(2);
+        ai.getPlayerPlayFieldMediator().getEnemyPlayfield(ai).get(0).setCard(builder.build());
+        ai.getPlayerPlayFieldMediator().getEnemyPlayfield(ai).get(1).setCard(builder.build());
+        ai.getPlayerPlayFieldMediator().getPlayfield().get(ai).get(0).setCard(builder.build());
+        assertEquals(List.of(1),choiceMaker.getUnprotectedFieldIndices());
     }
 
     @Test
     void fieldIsUnprotected() {
+        CardBuilder builder = new CardBuilder().setSummonEnergyPoints(3).setAttackPoints(3).setHealthPoints(2);
+        ai.getPlayerPlayFieldMediator().getEnemyPlayfield(ai).get(0).setCard(builder.build());
+        ai.getPlayerPlayFieldMediator().getEnemyPlayfield(ai).get(1).setCard(builder.build());
+        ai.getPlayerPlayFieldMediator().getPlayfield().get(ai).get(0).setCard(builder.build());
+        assertFalse(choiceMaker.fieldIsUnprotected(0));
+        assertTrue(choiceMaker.fieldIsUnprotected(1));
     }
 }

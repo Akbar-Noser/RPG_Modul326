@@ -28,13 +28,10 @@ public class Application extends JFrame {
     public static void main(String[] args) {
         //Temporary players
         PlayerPlayFieldMediator mediator = new PlayerPlayFieldMediator();
-        Player user = new User();
+        Player user = new User(mediator);
         Player ai = new EnemyAi(mediator);
         mediator.setPlayerAI(ai);
         mediator.setPlayerUser(user);
-
-        user.setPlayerPlayFieldMediator(mediator);
-        ai.setPlayerPlayFieldMediator(mediator);
 
         EventQueue.invokeLater(() -> {
             Application ex = new Application();

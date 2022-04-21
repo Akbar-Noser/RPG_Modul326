@@ -158,7 +158,7 @@ public class ChoiceMaker {
     /**
      * Generates all the possible choice objects when given all the possible positions.
      *
-     * @param cards the cards that should be placed.
+     * @param cards                     the cards that should be placed.
      * @param possiblePositionsForCards the possible positions on which they can be placed.
      * @return a list of all the possible choice objects.
      */
@@ -209,16 +209,30 @@ public class ChoiceMaker {
     public List<Integer> getUnprotectedFieldIndices() {
         List<Integer> unprotectedFields = new ArrayList<>(PlayField.getMaxAmountCardFields());
         for (int i = 0; i < enemyField.size(); i++) {
-            CardField field = enemyField.get(i);
-            if (fieldIsUnprotected(field, i))
+            if (fieldIsUnprotected(i))
                 unprotectedFields.add(i);
         }
 
         return unprotectedFields;
     }
 
-    public boolean fieldIsUnprotected(CardField field, int index) {
-        return field.getCard() != null && ownField.get(index).getCard() == null && field.getCard().getAttackPoints() > 0;
+    /**
+     * Checks if a field is unprotected
+     *
+     * @param index the index of the field to be checked
+     * @return a boolean value which expresses if the field is unprotected.
+     */
+    public boolean fieldIsUnprotected(int index) {
+        CardField enemyCardField = enemyField.get(index);
+        return enemyCardField.getCard() != null && ownField.get(index).getCard() == null && enemyCardField.getCard().getAttackPoints() > 0;
+    }
+
+    public void setEnemyField(List<CardField> enemyField) {
+        this.enemyField = enemyField;
+    }
+
+    public void setOwnField(List<CardField> ownField) {
+        this.ownField = ownField;
     }
 
     public void setFieldsToDefend(List<Integer> fieldsToDefend) {

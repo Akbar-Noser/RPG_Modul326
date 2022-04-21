@@ -17,7 +17,7 @@ public class Choice {
         this.requiredSummonEnergy = cardsToBePlayed.values().stream().mapToInt(Card::getSummonEnergyPoints).sum();
         this.damageTakenByClient = damageTakenByClient;
         this.amountOfEnemyCardsEliminated = amountOfEnemyCardsEliminated;
-        this.requiredSummonEnergy = cardsToBePlayed.values().stream().mapToInt(Card::getAttackPoints).sum();
+        this.damageDealtToEnemyCards = cardsToBePlayed.values().stream().mapToInt(Card::getAttackPoints).sum() - damageDealtToEnemy;
 
         this.damageDealtToEnemy = damageDealtToEnemy;
     }

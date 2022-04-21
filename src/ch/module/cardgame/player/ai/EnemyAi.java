@@ -1,5 +1,6 @@
 package ch.module.cardgame.player.ai;
 
+import ch.module.cardgame.field.PlayField;
 import ch.module.cardgame.mediator.PlayerPlayFieldMediator;
 import ch.module.cardgame.player.Player;
 
@@ -7,7 +8,8 @@ public class EnemyAi extends Player {
     private ChoiceMaker choiceMaker;
 
     public EnemyAi(PlayerPlayFieldMediator playerPlayFieldMediator) {
-        setPlayerPlayFieldMediator(playerPlayFieldMediator);
+        super(playerPlayFieldMediator);
+        playerPlayFieldMediator.setPlayerAI(this);
         this.choiceMaker = new ChoiceMaker(this);
     }
 
@@ -21,6 +23,7 @@ public class EnemyAi extends Player {
         drawCard();
     }
 
-
-
+    public ChoiceMaker getChoiceMaker() {
+        return choiceMaker;
+    }
 }

@@ -11,7 +11,8 @@ public abstract class Player {
     protected CardDeck deck;
     protected PlayerPlayFieldMediator playerPlayFieldMediator;
 
-    protected Player() {
+    protected Player(PlayerPlayFieldMediator mediator) {
+        this.playerPlayFieldMediator = mediator;
         this.stats = new PlayerStats();
         this.hand = new PlayerHand();
         this.deck = new CardDeck();

@@ -6,6 +6,8 @@ import ch.module.cardgame.mediator.CardFieldMediator;
 import ch.module.cardgame.player.Player;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Singleton class for representing the actual play board or field.
@@ -60,7 +62,7 @@ public class PlayField {
      * @param player the player who should be registered
      */
     public void registerPlayer(Player player) {
-        cardFields.put(player, Collections.nCopies(MAX_AMOUNT_CARD_FIELDS, new CardField()));
+        cardFields.put(player, Stream.generate(CardField::new).limit(MAX_AMOUNT_CARD_FIELDS).toList());
     }
 
     /**
