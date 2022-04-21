@@ -1,9 +1,7 @@
 package ch.module.cardgame.card;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
-import java.util.Stack;
 
 public class CardDeck {
     private Deque<Card> cards;
@@ -22,6 +20,10 @@ public class CardDeck {
         for (int i = 0; i < MAX_CARDS; i++) {
             cards.push(CardGenerator.getInstance().generateRandomCard());
         }
+    }
+
+    public Card popTopCard() {
+        return cards.pop();
     }
 
     public int getMAX_CARDS() {
