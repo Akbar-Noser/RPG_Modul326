@@ -19,7 +19,6 @@ public class PlayField {
     private Map<Player, List<CardField>> cardFields;
     private List<CardFieldMediator> cardSlotMediators;
 
-    //TODO: Add a registerPlayer method to register a player's fields
     public PlayField() {
         cardFields = new HashMap<>();
         cardSlotMediators = new ArrayList<>(MAX_AMOUNT_CARD_FIELDS);
