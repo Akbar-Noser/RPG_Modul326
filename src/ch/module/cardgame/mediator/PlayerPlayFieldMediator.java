@@ -25,12 +25,34 @@ public class PlayerPlayFieldMediator {
         this.playerUser = playerUser;
     }
 
+    /**
+     * Controls the interaction that happens when a player ends his turn.
+     * The player who ended his turn will attack with all the placed cards.
+     *
+     * @param initiator the player who ended his turn
+     */
     public void endTurn(Player initiator) {
-        //TODO pick which player has ended the turn :  dealDamage(PlayField.getInstance().attackAllOppositeFields(playerAI, playerUser));
+        Player defender = getOtherPlayer(initiator);
+        int damage = PlayField.getInstance().attackAllOppositeFields(initiator, defender);
+        dealDamage(defender, damage);
+        initiator.getStats().incrementEnergyBy(2);
     }
 
-    public void dealDamage(Player initiator, int damagePoints) {
-        //TODO pick which player has attacked and then calculate the dmg :  player.getStats().setHealth(player.getStats().getHealth() - damagePoints);
+    /**
+     * Deals damage to a player and ends the game if that player would die from the attack.
+     * The other player is declared as the winner if that is the case.
+     *
+     * @param receiver The player who receives the damage.
+     * @param damagePoints The amount of damage dealt.
+     */
+    private void dealDamage(Player receiver, int damagePoints) {
+        if (receiver.getStats().getHealth() - damagePoints <= 0)
+            endGame(getOtherPlayer(receiver));
+        receiver.getStats().decrementHealthBy(damagePoints);
+    }
+
+    public void endGame(Player winner) {
+        //TODO: Implement winning interaction/screen
     }
 
     public boolean playCard(Player initiator, Card card, int fieldIndex) {
@@ -53,6 +75,10 @@ public class PlayerPlayFieldMediator {
 
     public void setPlayerUser(Player playerUser) {
         this.playerUser = playerUser;
+    }
+
+    public Player getOtherPlayer(Player currentPlayer) {
+        return currentPlayer == playerAI ? playerAI : playerUser;
     }
 
     public void setPlayerAI(Player playerAI) {
