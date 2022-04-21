@@ -46,6 +46,7 @@ public class PlayField {
      *
      * @param attacker        Current player attacking
      * @param defender        Player receiving the attack.
+     * @return The total damage which the defender will receive
      */
     public int attackAllOppositeFields(Player attacker, Player defender) {
         int damageSum = 0;

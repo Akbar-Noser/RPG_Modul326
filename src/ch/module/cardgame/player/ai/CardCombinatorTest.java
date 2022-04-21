@@ -5,8 +5,10 @@ import ch.module.cardgame.card.CardBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CardCombinatorTest {
@@ -34,5 +36,22 @@ class CardCombinatorTest {
                 List.of(card2, card3)
         );
         assertEquals(uniqueCombinations, CardCombinator.getUniqueCombinationsOfCards(cards));
+    }
+
+    @Test
+    void getAllPermutations() {
+        List<int[]> correctPermutations = List.of(
+                new int[]{1, 2, 3},
+                new int[]{2, 1, 3},
+                new int[]{3, 1, 2},
+                new int[]{1, 3, 2},
+                new int[]{2, 3, 1},
+                new int[]{3, 2, 1}
+        );
+        List<int[]> result = new ArrayList<>(correctPermutations.size());
+        CardCombinator.getAllPermutations(result, new int[]{1, 2, 3}, 3, 3);
+        for (int i = 0; i < result.size(); i++) {
+            assertArrayEquals(correctPermutations.get(i), result.get(i));
+        }
     }
 }
