@@ -1,25 +1,43 @@
 package ch.module.cardgame.graphics;
 
+import ch.module.cardgame.field.PlayField;
+import ch.module.cardgame.graphics.cardfield.VisualCardFieldRow;
+import ch.module.cardgame.graphics.deck.VisualDeck;
+import ch.module.cardgame.graphics.hand.VisualHand;
+import ch.module.cardgame.player.Player;
+import ch.module.cardgame.player.ai.EnemyAi;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 
 public class Board extends JPanel {
+    private Player playerUser;
+    private Player playerAi;
 
     public Board() {
+        PlayField.getInstance().getCardFields().keySet().forEach(player -> {
+            if (player instanceof EnemyAi)
+                playerAi = player;
+            else
+                playerUser = player;
+        });
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        generateBoard();
+        setVisible(true);
     }
 
-
-    /**
-     * Testing purposes
-     *
-     */
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        drawDonut(g);
+    public void generateBoard() {
+        add(Box.createVerticalGlue());
+        add(new VisualHand(playerUser));
+        add(Box.createVerticalGlue());
+        add(new VisualCardFieldRow());
+        add(Box.createVerticalGlue());
+        add(new VisualCardFieldRow());
+        add(Box.createVerticalGlue());
+        add(new VisualHand(playerAi));
+        add(Box.createVerticalGlue());
     }
 
     private void drawDonut(Graphics g) {
