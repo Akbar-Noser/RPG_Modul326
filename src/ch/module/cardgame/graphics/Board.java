@@ -4,6 +4,7 @@ import ch.module.cardgame.field.PlayField;
 import ch.module.cardgame.graphics.cardfield.VisualCardFieldRow;
 import ch.module.cardgame.graphics.deck.VisualDeck;
 import ch.module.cardgame.graphics.hand.VisualHand;
+import ch.module.cardgame.graphics.player.VisualStats;
 import ch.module.cardgame.player.Player;
 import ch.module.cardgame.player.ai.EnemyAi;
 
@@ -29,6 +30,7 @@ public class Board extends JPanel {
     }
 
     public void generateBoard() {
+        add(new VisualStats(playerUser));
         add(Box.createVerticalGlue());
         add(new VisualHand(playerUser));
         add(Box.createVerticalGlue());
@@ -38,6 +40,7 @@ public class Board extends JPanel {
         add(Box.createVerticalGlue());
         add(new VisualHand(playerAi));
         add(Box.createVerticalGlue());
+        add(new VisualStats(playerAi));
     }
 
     private void drawDonut(Graphics g) {

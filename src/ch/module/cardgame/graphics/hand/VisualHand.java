@@ -19,7 +19,7 @@ public class VisualHand extends JPanel {
         this.owner = owner;
         cards = new ArrayList<>(Stream.generate(VisualCard::new).limit(PlayerHand.getMAX_CARDS()).toList());
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+        setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         visualizeHand();
         setVisible(true);
     }
