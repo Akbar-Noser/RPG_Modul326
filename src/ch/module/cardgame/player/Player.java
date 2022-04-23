@@ -67,4 +67,8 @@ public abstract class Player {
     public void setPlayerPlayFieldMediator(PlayerPlayFieldMediator playerPlayFieldMediator) {
         this.playerPlayFieldMediator = playerPlayFieldMediator;
     }
+
+    public CardDeck getDeck() {
+        return deck;
+    }
 }

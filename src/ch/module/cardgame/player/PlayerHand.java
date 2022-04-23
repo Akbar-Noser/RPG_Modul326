@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PlayerHand {
 
-    private final int MAX_CARDS = 5;
+    private static final int MAX_CARDS = 5;
 
     private List<Card> cards;
 
@@ -32,7 +32,7 @@ public class PlayerHand {
         return cards.size();
     }
 
-    public int getMAX_CARDS() {
+    public static int getMAX_CARDS() {
         return MAX_CARDS;
     }
 
