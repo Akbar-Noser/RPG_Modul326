@@ -22,6 +22,7 @@ public class VisualPlayerSide {
         this.owner = owner;
         handFieldMediator = new HandFieldMediator();
         stats = new VisualPlayerStats(owner);
+        handFieldMediator.setStats(stats);
         hand = new VisualHand(owner, handFieldMediator);
         handFieldMediator.setVisualHand(hand);
         cardFieldRow = new VisualCardFieldRow(owner, handFieldMediator);

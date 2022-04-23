@@ -62,6 +62,7 @@ public class VisualCardFieldRow extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 if (handFieldMediator.getActiveCard() != null) {
                     owner.playCard(handFieldMediator.getActiveCard().getCard(), index);
+                    System.out.println(owner.getStats().getEnergy());
                     handFieldMediator.rerender();
                 }
             }

@@ -41,6 +41,8 @@ public abstract class Player {
      * @return true if the card was successfully played, false otherwise
      */
     public boolean playCard(Card card, int index) {
+        if (card.getSummonEnergyPoints() > stats.getEnergy())
+            return false;
         boolean successful = playerPlayFieldMediator.playCard(this, card, index);
         if (successful)
             stats.decrementEnergyBy(card.getSummonEnergyPoints());
