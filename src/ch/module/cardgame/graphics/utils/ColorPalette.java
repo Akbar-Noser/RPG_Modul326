@@ -8,6 +8,7 @@ public class ColorPalette {
     public static final Color HEALTH = new Color(32, 212, 38);
     public static final Color ENERGY = new Color(141, 27, 143);
     public static final Color ATTACK = new Color(222, 55, 33);
+    public static final Color ACTIVE_ACTION = new Color(32, 149, 212);
 
     private ColorPalette() {
     }
