@@ -7,10 +7,10 @@ import ch.module.cardgame.player.Player;
 import javax.swing.*;
 import java.awt.*;
 
-public class VisualStats extends JPanel {
+public class VisualPlayerStats extends JPanel {
     private final Player owner;
 
-    public VisualStats(Player owner) {
+    public VisualPlayerStats(Player owner) {
         this.owner = owner;
         visualizeStats();
         setVisible(true);

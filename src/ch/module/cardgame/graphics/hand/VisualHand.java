@@ -17,7 +17,7 @@ public class VisualHand extends JPanel {
 
     public VisualHand(Player owner) {
         this.owner = owner;
-        cards = new ArrayList<>(Stream.generate(VisualCard::new).limit(PlayerHand.getMAX_CARDS()).toList());
+        cards = new ArrayList<>(owner.getHand().getCards().stream().map(VisualCard::new).toList());
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         visualizeHand();
         setVisible(true);

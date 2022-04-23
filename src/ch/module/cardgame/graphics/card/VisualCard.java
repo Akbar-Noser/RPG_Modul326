@@ -1,5 +1,6 @@
 package ch.module.cardgame.graphics.card;
 
+import ch.module.cardgame.card.Card;
 import ch.module.cardgame.graphics.utils.ColorPalette;
 import ch.module.cardgame.graphics.utils.DimensionPresets;
 import ch.module.cardgame.graphics.utils.ImageLibrary;
@@ -8,10 +9,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VisualCard extends JPanel {
-    public VisualCard() {
+    private Card card;
+    private VisualCardStats visualCardStats;
+
+    public VisualCard(Card card) {
+        this.card = card;
+        visualCardStats = new VisualCardStats(card);
         setPreferredSize(DimensionPresets.CARD_DIMENSIONS);
+        setLayout(new BorderLayout());
         setBackground(ColorPalette.CARD_BACKGROUND_COLOR);
         setMaximumSize(DimensionPresets.CARD_DIMENSIONS);
+        add(visualCardStats, BorderLayout.PAGE_END);
         setVisible(true);
     }
 
