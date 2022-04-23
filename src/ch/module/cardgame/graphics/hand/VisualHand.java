@@ -4,10 +4,12 @@ import ch.module.cardgame.graphics.card.VisualCard;
 import ch.module.cardgame.graphics.deck.VisualDeck;
 import ch.module.cardgame.graphics.mediator.DeckHandMediator;
 import ch.module.cardgame.graphics.mediator.HandFieldMediator;
+import ch.module.cardgame.graphics.playfield.EndTurnButton;
 import ch.module.cardgame.graphics.utils.ColorPalette;
 import ch.module.cardgame.graphics.utils.DimensionPresets;
 import ch.module.cardgame.player.Player;
 import ch.module.cardgame.player.ai.EnemyAi;
+import ch.module.cardgame.player.user.User;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -39,13 +41,14 @@ public class VisualHand extends JPanel {
     }
 
     private void visualizeHand() {
+        Dimension smallWhiteSpace = new Dimension((int) (DimensionPresets.CARD_DIMENSIONS.getWidth() / 2),
+                (int) DimensionPresets.CARD_DIMENSIONS.getHeight());
         add(Box.createRigidArea(new Dimension((int) (DimensionPresets.CARD_DIMENSIONS.getWidth() / 2),
                 (int) DimensionPresets.CARD_DIMENSIONS.getHeight())));
         add(deck);
-        Dimension whiteSpaceRight = DimensionPresets.WHITE_SPACE;
-        Dimension whiteSpaceLeft = new Dimension((int) (DimensionPresets.WHITE_SPACE.getWidth() / 2),
+        Dimension whiteSpace = new Dimension((int) (DimensionPresets.WHITE_SPACE.getWidth() / 2),
                 (int) DimensionPresets.CARD_DIMENSIONS.getHeight());
-        add(Box.createRigidArea(whiteSpaceLeft));
+        add(Box.createRigidArea(whiteSpace));
         add(Box.createHorizontalGlue());
         cards.forEach(visualCard -> {
             visualCard.addMouseListener(cardOnClickListener(visualCard));
@@ -54,7 +57,13 @@ public class VisualHand extends JPanel {
             add(visualCard);
             add(Box.createHorizontalGlue());
         });
-        add(Box.createRigidArea(whiteSpaceRight));
+        if (owner instanceof User) {
+            add(Box.createRigidArea(smallWhiteSpace));
+            add(new EndTurnButton());
+            add(Box.createRigidArea(whiteSpace));
+        }
+        else
+            add(Box.createRigidArea(DimensionPresets.WHITE_SPACE));
     }
 
     private MouseAdapter cardOnClickListener(VisualCard card) {
