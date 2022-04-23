@@ -5,6 +5,7 @@ import ch.module.cardgame.graphics.utils.ColorPalette;
 import ch.module.cardgame.graphics.text.NumberIndicator;
 import ch.module.cardgame.graphics.utils.DimensionPresets;
 import ch.module.cardgame.player.Player;
+import ch.module.cardgame.player.ai.EnemyAi;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +36,7 @@ public class VisualDeck extends JPanel {
     }
 
     private MouseAdapter getOnClickFunction() {
-        return new MouseAdapter() {
+        return owner instanceof EnemyAi ? null : new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 owner.drawCard();

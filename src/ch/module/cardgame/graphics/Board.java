@@ -34,9 +34,9 @@ public class Board extends JPanel {
     }
 
     public void generateBoard() {
-        userPlayerSide.renderBottomUp();
+        aiPlayerSide.renderBottomUp();
         add(Box.createVerticalGlue());
-        aiPlayerSide.renderTopDown();
+        userPlayerSide.renderTopDown();
     }
 
     private void drawDonut(Graphics g) {

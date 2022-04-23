@@ -7,6 +7,7 @@ import ch.module.cardgame.graphics.mediator.HandFieldMediator;
 import ch.module.cardgame.graphics.utils.ColorPalette;
 import ch.module.cardgame.graphics.utils.DimensionPresets;
 import ch.module.cardgame.player.Player;
+import ch.module.cardgame.player.ai.EnemyAi;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -57,7 +58,7 @@ public class VisualHand extends JPanel {
     }
 
     private MouseAdapter cardOnClickListener(VisualCard card) {
-        return new MouseAdapter() {
+        return owner instanceof EnemyAi ? null : new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (isEqualToActiveCard(card))

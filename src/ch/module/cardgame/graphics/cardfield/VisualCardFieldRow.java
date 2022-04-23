@@ -5,6 +5,7 @@ import ch.module.cardgame.field.PlayField;
 import ch.module.cardgame.graphics.mediator.HandFieldMediator;
 import ch.module.cardgame.graphics.utils.DimensionPresets;
 import ch.module.cardgame.player.Player;
+import ch.module.cardgame.player.ai.EnemyAi;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -57,12 +58,11 @@ public class VisualCardFieldRow extends JPanel {
     }
 
     private MouseAdapter getCardFieldOnClickFunction(int index) {
-        return new MouseAdapter() {
+        return owner instanceof EnemyAi ? null : new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (handFieldMediator.getActiveCard() != null) {
                     owner.playCard(handFieldMediator.getActiveCard().getCard(), index);
-                    System.out.println(owner.getStats().getEnergy());
                     handFieldMediator.rerender();
                 }
             }
