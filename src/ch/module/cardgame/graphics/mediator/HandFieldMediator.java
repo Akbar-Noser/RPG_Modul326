@@ -13,6 +13,11 @@ public class HandFieldMediator {
         return activeCard;
     }
 
+    public void rerender() {
+        visualHand.rerender();
+        fieldRow.rerender();
+    }
+
     public void setActiveCard(VisualCard activeCard) {
         this.activeCard = activeCard;
     }
