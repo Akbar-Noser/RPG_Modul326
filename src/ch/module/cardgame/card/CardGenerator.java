@@ -30,7 +30,7 @@ public class CardGenerator {
      */
     public Card generateRandomCard() {
         int attack = ThreadLocalRandom.current().nextInt(MAX_ATTACK + 1);
-        int health = ThreadLocalRandom.current().nextInt(MAX_HEALTH + 1);
+        int health = ThreadLocalRandom.current().nextInt(MAX_HEALTH) + 1;
         int summonEnergy = calcSummonEnergy(health, attack);
         return cardBuilder.setAttackPoints(attack).setHealthPoints(health).setSummonEnergyPoints(summonEnergy).build();
     }

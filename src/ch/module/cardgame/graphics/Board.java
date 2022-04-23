@@ -4,6 +4,7 @@ import ch.module.cardgame.field.PlayField;
 import ch.module.cardgame.graphics.cardfield.VisualCardFieldRow;
 import ch.module.cardgame.graphics.hand.VisualHand;
 import ch.module.cardgame.graphics.player.VisualPlayerStats;
+import ch.module.cardgame.graphics.playfield.VisualPlayerSide;
 import ch.module.cardgame.player.Player;
 import ch.module.cardgame.player.ai.EnemyAi;
 
@@ -14,7 +15,9 @@ import java.awt.geom.Ellipse2D;
 
 public class Board extends JPanel {
     private Player playerUser;
+    private VisualPlayerSide userPlayerSide;
     private Player playerAi;
+    private VisualPlayerSide aiPlayerSide;
 
     public Board() {
         PlayField.getInstance().getCardFields().keySet().forEach(player -> {
@@ -24,22 +27,16 @@ public class Board extends JPanel {
                 playerUser = player;
         });
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        userPlayerSide = new VisualPlayerSide(playerUser, this);
+        aiPlayerSide = new VisualPlayerSide(playerAi, this);
         generateBoard();
         setVisible(true);
     }
 
     public void generateBoard() {
-        add(new VisualPlayerStats(playerUser));
+        userPlayerSide.renderBottomUp();
         add(Box.createVerticalGlue());
-        add(new VisualHand(playerUser));
-        add(Box.createVerticalGlue());
-        add(new VisualCardFieldRow());
-        add(Box.createVerticalGlue());
-        add(new VisualCardFieldRow());
-        add(Box.createVerticalGlue());
-        add(new VisualHand(playerAi));
-        add(Box.createVerticalGlue());
-        add(new VisualPlayerStats(playerAi));
+        aiPlayerSide.renderTopDown();
     }
 
     private void drawDonut(Graphics g) {
