@@ -18,7 +18,6 @@ public class Choice {
         this.damageTakenByClient = damageTakenByClient;
         this.amountOfEnemyCardsEliminated = amountOfEnemyCardsEliminated;
         this.damageDealtToEnemyCards = cardsToBePlayed.values().stream().mapToInt(Card::getAttackPoints).sum() - damageDealtToEnemy;
-
         this.damageDealtToEnemy = damageDealtToEnemy;
     }
 

@@ -9,20 +9,27 @@ import java.awt.*;
 
 public class VisualPlayerStats extends JPanel {
     private final Player owner;
+    private final NumberIndicator health;
+    private final NumberIndicator energy;
 
     public VisualPlayerStats(Player owner) {
         this.owner = owner;
+        health = new NumberIndicator(owner.getStats().getHealth() + "");
+        energy = new NumberIndicator(owner.getStats().getEnergy() + "");
         visualizeStats();
         setVisible(true);
     }
 
     private void visualizeStats() {
-        NumberIndicator health = new NumberIndicator(owner.getStats().getHealth() + "");
         health.setForeground(ColorPalette.HEALTH);
-        NumberIndicator energy = new NumberIndicator(owner.getStats().getEnergy() + "");
         energy.setForeground(ColorPalette.ENERGY);
         add(health, BorderLayout.WEST);
         add(energy, BorderLayout.EAST);
+    }
 
+    public void rerender() {
+        health.setText(owner.getStats().getHealth() + "");
+        energy.setText(owner.getStats().getEnergy() + "");
+        revalidate();
     }
 }

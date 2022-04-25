@@ -4,6 +4,7 @@ package ch.module.cardgame.mediator;
 import ch.module.cardgame.card.Card;
 import ch.module.cardgame.card.CardField;
 import ch.module.cardgame.field.PlayField;
+import ch.module.cardgame.graphics.Board;
 import ch.module.cardgame.player.Player;
 
 import java.util.List;
@@ -52,7 +53,7 @@ public class PlayerPlayFieldMediator {
     }
 
     public void endGame(Player winner) {
-        //TODO: Implement winning interaction/screen
+        Board.getInstance().launchWinnerScreen(winner);
     }
 
     public boolean playCard(Player initiator, Card card, int fieldIndex) {
@@ -78,7 +79,7 @@ public class PlayerPlayFieldMediator {
     }
 
     public Player getOtherPlayer(Player currentPlayer) {
-        return currentPlayer == playerAI ? playerAI : playerUser;
+        return currentPlayer == playerAI ? playerUser : playerAI;
     }
 
     public void setPlayerAI(Player playerAI) {

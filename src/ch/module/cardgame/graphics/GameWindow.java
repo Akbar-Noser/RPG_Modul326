@@ -12,7 +12,7 @@ public class GameWindow extends JFrame {
     private void initUI() {
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(450, 250));
-        add(new Board(), BorderLayout.CENTER);
+        add(Board.getInstance(), BorderLayout.CENTER);
         setExtendedState(MAXIMIZED_BOTH);
         setTitle("Cards of Cyberpunk 2077");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -28,4 +28,8 @@ public class VisualCard extends JPanel {
         super.paintComponent(g);
         g.drawImage(ImageLibrary.CARD_BACKGROUND.getImage(), 0,0, null);
     }
+
+    public Card getCard() {
+        return card;
+    }
 }

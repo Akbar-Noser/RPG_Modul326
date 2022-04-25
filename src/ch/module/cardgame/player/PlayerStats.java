@@ -63,8 +63,10 @@ public class PlayerStats {
      * @return New energy value after addition.
      */
     public int incrementEnergyBy(int valueToAdd) {
-        if (energy + valueToAdd > MAX_ENERGY)
+        if (energy + valueToAdd > MAX_ENERGY) {
+            energy = MAX_ENERGY;
             return MAX_ENERGY;
+        }
         energy += valueToAdd;
         return energy;
     }

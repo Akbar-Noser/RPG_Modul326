@@ -14,13 +14,16 @@ public class EnemyAi extends Player {
 
     @Override
     public void endTurn() {
+        super.endTurn();
         makeChoice();
         playerPlayFieldMediator.endTurn(this);
     }
 
     private void makeChoice() {
         drawCard();
-        choiceMaker.getOptimalChoice().getCardsToBePlayed().forEach((index, card) -> playCard(card, index));
+        Choice optimalChoice = choiceMaker.getOptimalChoice();
+        if (optimalChoice != null)
+            optimalChoice.getCardsToBePlayed().forEach((index, card) -> playCard(card, index));
     }
 
     public ChoiceMaker getChoiceMaker() {

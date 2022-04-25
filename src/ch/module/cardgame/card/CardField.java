@@ -10,6 +10,10 @@ public class CardField {
     public CardField() {
     }
 
+    public CardField(Card card) {
+        this.card = card;
+    }
+
     public Card getCard() {
         return card;
     }
