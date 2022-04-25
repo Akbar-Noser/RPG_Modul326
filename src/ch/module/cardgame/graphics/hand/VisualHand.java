@@ -85,6 +85,7 @@ public class VisualHand extends JPanel {
     }
 
     public void rerender() {
+        deck.rerender();
         cards = owner.getHand().getCards().stream().map(VisualCard::new).toList();
         removeAll();
         visualizeHand();

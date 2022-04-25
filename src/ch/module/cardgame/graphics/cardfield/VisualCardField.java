@@ -19,10 +19,12 @@ public class VisualCardField extends JPanel {
     }
 
     public void rerender() {
+        removeAll();
         if (cardField.getCard() != null) {
             setBackground(ColorPalette.CARD_BACKGROUND_COLOR);
             add(new VisualCard(cardField.getCard()));
-        }
+        } else
+            setBackground(ColorPalette.EMPTY_CARD_FIELD);
         revalidate();
         repaint();
     }

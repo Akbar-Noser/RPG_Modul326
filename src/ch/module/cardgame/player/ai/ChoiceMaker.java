@@ -140,6 +140,8 @@ public class ChoiceMaker {
         for (List<Card> cardCombination : cardCombinations) {
             choices.addAll(generateAllChoicesForCombination(cardCombination, possiblePositionsForCards));
         }
+        if (choices.isEmpty())
+            choices.add(new Choice(Map.of(), 0,0, 0));
         return choices;
     }
 
