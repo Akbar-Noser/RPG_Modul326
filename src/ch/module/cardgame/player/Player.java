@@ -28,7 +28,7 @@ public abstract class Player {
      * Adds card from the top of the deck to the hand if the hand doesn't hold the maximum capacity
      */
     public void drawCard () {
-        if(!hasDrawnCard && hand.amountOfCardsInHand() < hand.getMAX_CARDS()) {
+        if(!hasDrawnCard && hand.amountOfCardsInHand() < PlayerHand.getMAX_CARDS() && !deck.getCards().isEmpty()) {
             hand.addToHand(deck.popTopCard());
             hasDrawnCard = true;
         }
