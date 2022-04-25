@@ -13,6 +13,7 @@ public class ChoiceMaker {
     private List<CardField> enemyField;
     private List<CardField> ownField;
     private List<Integer> fieldsToDefend;
+    private List<Integer> openFields;
 
     public ChoiceMaker(Player client) {
         this.client = client;
@@ -48,7 +49,7 @@ public class ChoiceMaker {
         int lowestDamage = choices.get(0).getDamageTakenByClient();
         result.add(choices.get(0));
         int i = 1;
-        while (choices.get(i).getDamageTakenByClient() == lowestDamage) {
+        while (i < choices.size() && choices.get(i).getDamageTakenByClient() == lowestDamage) {
             result.add(choices.get(i));
             i++;
         }
@@ -71,7 +72,7 @@ public class ChoiceMaker {
         int lowestEnergy = choices.get(0).getRequiredSummonEnergy();
         result.add(choices.get(0));
         int i = 1;
-        while (choices.get(i).getRequiredSummonEnergy() == lowestEnergy) {
+        while (i < choices.size() && choices.get(i).getRequiredSummonEnergy() == lowestEnergy) {
             result.add(choices.get(i));
             i++;
         }
@@ -94,7 +95,7 @@ public class ChoiceMaker {
         int highestDamage = choices.get(0).getDamageDealtToEnemy();
         result.add(choices.get(0));
         int i = 1;
-        while (choices.get(i).getDamageDealtToEnemy() == highestDamage) {
+        while (i < choices.size() && choices.get(i).getDamageDealtToEnemy() == highestDamage) {
             result.add(choices.get(i));
             i++;
         }
@@ -116,7 +117,7 @@ public class ChoiceMaker {
         int highestDamage = choices.get(0).getAmountOfEnemyCardsEliminated();
         result.add(choices.get(0));
         int i = 1;
-        while (choices.get(i).getAmountOfEnemyCardsEliminated() == highestDamage) {
+        while (i < choices.size() && choices.get(i).getAmountOfEnemyCardsEliminated() == highestDamage) {
             result.add(choices.get(i));
             i++;
         }
@@ -129,10 +130,11 @@ public class ChoiceMaker {
      * @return a linked list of all the choice objects.
      */
     public List<Choice> generateChoices() {
+        openFields = getIndicesOfOpenFields();
         List<List<Card>> cardCombinations = CardCombinator.getUniqueCombinationsOfCards(client.getHand().getCards());
         cardCombinations = filterImpossibleCombinations(cardCombinations);
         List<int[]> possiblePositionsForCards = new LinkedList<>();
-        int[] possiblePositions = fieldsToDefend.stream().mapToInt(Integer::intValue).toArray();
+        int[] possiblePositions = openFields.stream().mapToInt(Integer::intValue).toArray();
         CardCombinator.getAllPermutations(possiblePositionsForCards, possiblePositions, possiblePositions.length, possiblePositions.length);
         List<Choice> choices = new LinkedList<>();
         for (List<Card> cardCombination : cardCombinations) {
@@ -149,10 +151,10 @@ public class ChoiceMaker {
      * @return The combinations which can possibly be played by the client.
      */
     public List<List<Card>> filterImpossibleCombinations(List<List<Card>> combinations) {
-        long openFields = PlayField.getMaxAmountCardFields() - ownField.stream().filter(cardField -> cardField.getCard() != null).count();
+        long amountOfOpenFields = openFields.size();
         return combinations.stream().filter(cards ->
                 cards.stream().mapToInt(Card::getSummonEnergyPoints).sum() <= client.getStats().getEnergy()
-                        && cards.size() <= openFields).collect(Collectors.toList());
+                        && cards.size() <= amountOfOpenFields).collect(Collectors.toList());
     }
 
     /**
@@ -166,7 +168,7 @@ public class ChoiceMaker {
         List<Choice> choices = new LinkedList<>();
         for (int[] possiblePosition : possiblePositionsForCards) {
             Map<Integer, Card> cardsToBePlaced = new HashMap<>();
-            for (int i = 0; i < possiblePosition.length; i++) {
+            for (int i = 0; i < cards.size(); i++) {
                 cardsToBePlaced.put(possiblePosition[i], cards.get(i));
             }
             choices.add(generateChoiceForCardPlacement(cardsToBePlaced));
@@ -185,7 +187,7 @@ public class ChoiceMaker {
                 cardsToBePlaced.get(fieldToDefend) == null ? enemyField.get(fieldToDefend).getCard().getAttackPoints() : 0).sum();
         int amountOfEnemyCardsEliminated = 0;
         int damageDealtToEnemy = 0;
-        List<CardField> futureOwnField = List.copyOf(ownField);
+        List<CardField> futureOwnField = ownField.stream().map(field -> new CardField(field.getCard())).toList();
         cardsToBePlaced.forEach((fieldIndex, card) -> futureOwnField.get(fieldIndex).setCard(card));
         for (int i = 0; i < futureOwnField.size(); i++) {
             Card ownCard = futureOwnField.get(i).getCard();
@@ -225,6 +227,15 @@ public class ChoiceMaker {
     public boolean fieldIsUnprotected(int index) {
         CardField enemyCardField = enemyField.get(index);
         return enemyCardField.getCard() != null && ownField.get(index).getCard() == null && enemyCardField.getCard().getAttackPoints() > 0;
+    }
+
+    private List<Integer> getIndicesOfOpenFields() {
+        List<Integer> indices = new ArrayList<>(PlayField.getMaxAmountCardFields());
+        for (int i = 0; i < ownField.size(); i++) {
+            if (ownField.get(i).getCard() == null)
+                indices.add(i);
+        }
+        return indices;
     }
 
     public void setEnemyField(List<CardField> enemyField) {

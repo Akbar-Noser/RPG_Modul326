@@ -1,13 +1,21 @@
 package ch.module.cardgame.graphics.playfield;
 
+import ch.module.cardgame.graphics.Board;
 import ch.module.cardgame.graphics.utils.ColorPalette;
 import ch.module.cardgame.graphics.utils.DimensionPresets;
+import ch.module.cardgame.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
 
 public class EndTurnButton extends JButton {
-    public EndTurnButton() {
+    private final Player owner;
+
+    public EndTurnButton(Player owner) {
+        this.owner = owner;
         setBackground(ColorPalette.ACTIVE_ACTION);
         setSize(DimensionPresets.BUTTON_DIMENSIONS);
         setPreferredSize(DimensionPresets.BUTTON_DIMENSIONS);
@@ -15,6 +23,22 @@ public class EndTurnButton extends JButton {
         setForeground(Color.WHITE);
         setFocusPainted(false);
         setText("End Turn");
+        addActionListener(getOnClickFunction());
         setVisible(true);
+    }
+
+    private ActionListener getOnClickFunction() {
+        return e -> {
+            owner.endTurn();
+            Board.getInstance().rerender();
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+            owner.getPlayerPlayFieldMediator().getOtherPlayer(owner).endTurn();
+            Board.getInstance().rerender();
+            System.out.println("clicked: user " + owner.getStats().getHealth() +  " ai " + owner.getPlayerPlayFieldMediator().getOtherPlayer(owner).getStats().getHealth());
+        };
     }
 }

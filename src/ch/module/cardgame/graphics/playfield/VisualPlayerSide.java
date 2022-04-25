@@ -44,4 +44,10 @@ public class VisualPlayerSide {
         board.add(Box.createVerticalGlue());
         board.add(stats);
     }
+
+    public void rerender() {
+        cardFieldRow.rerender();
+        hand.rerender();
+        stats.rerender();
+    }
 }

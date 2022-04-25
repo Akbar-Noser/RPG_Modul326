@@ -59,7 +59,7 @@ public class VisualHand extends JPanel {
         });
         if (owner instanceof User) {
             add(Box.createRigidArea(smallWhiteSpace));
-            add(new EndTurnButton());
+            add(new EndTurnButton(owner));
             add(Box.createRigidArea(whiteSpace));
         }
         else

@@ -20,7 +20,9 @@ public class EnemyAi extends Player {
 
     private void makeChoice() {
         drawCard();
-        choiceMaker.getOptimalChoice().getCardsToBePlayed().forEach((index, card) -> playCard(card, index));
+        Choice optimalChoice = choiceMaker.getOptimalChoice();
+        if (optimalChoice != null)
+            optimalChoice.getCardsToBePlayed().forEach((index, card) -> playCard(card, index));
     }
 
     public ChoiceMaker getChoiceMaker() {

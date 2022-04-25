@@ -78,7 +78,7 @@ public class PlayerPlayFieldMediator {
     }
 
     public Player getOtherPlayer(Player currentPlayer) {
-        return currentPlayer == playerAI ? playerAI : playerUser;
+        return currentPlayer == playerAI ? playerUser : playerAI;
     }
 
     public void setPlayerAI(Player playerAI) {
