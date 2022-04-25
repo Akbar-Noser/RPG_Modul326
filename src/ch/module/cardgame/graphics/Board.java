@@ -5,8 +5,10 @@ import ch.module.cardgame.graphics.cardfield.VisualCardFieldRow;
 import ch.module.cardgame.graphics.hand.VisualHand;
 import ch.module.cardgame.graphics.player.VisualPlayerStats;
 import ch.module.cardgame.graphics.playfield.VisualPlayerSide;
+import ch.module.cardgame.graphics.text.UserMessage;
 import ch.module.cardgame.player.Player;
 import ch.module.cardgame.player.ai.EnemyAi;
+import ch.module.cardgame.player.user.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,6 +44,14 @@ public class Board extends JPanel {
         aiPlayerSide.renderBottomUp();
         add(Box.createVerticalGlue());
         userPlayerSide.renderTopDown();
+    }
+
+    public void launchWinnerScreen(Player winner) {
+        removeAll();
+        UserMessage winnerMessage = new UserMessage(winner instanceof User ? "YOU WIN" : "YOU LOSE");
+        winnerMessage.setSize(getWidth(), getHeight());
+        winnerMessage.setFont(new Font(Font.DIALOG, Font.PLAIN, 280));
+        add(winnerMessage);
     }
 
     public void rerender() {

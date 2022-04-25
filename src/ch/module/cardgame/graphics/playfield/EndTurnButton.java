@@ -30,15 +30,8 @@ public class EndTurnButton extends JButton {
     private ActionListener getOnClickFunction() {
         return e -> {
             owner.endTurn();
-            Board.getInstance().rerender();
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
             owner.getPlayerPlayFieldMediator().getOtherPlayer(owner).endTurn();
             Board.getInstance().rerender();
-            System.out.println("clicked: user " + owner.getStats().getHealth() +  " ai " + owner.getPlayerPlayFieldMediator().getOtherPlayer(owner).getStats().getHealth());
         };
     }
 }

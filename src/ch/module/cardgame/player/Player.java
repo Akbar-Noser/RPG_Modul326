@@ -10,6 +10,7 @@ public abstract class Player {
     protected PlayerHand hand;
     protected CardDeck deck;
     protected PlayerPlayFieldMediator playerPlayFieldMediator;
+    private boolean hasDrawnCard;
 
     protected Player(PlayerPlayFieldMediator mediator) {
         this.playerPlayFieldMediator = mediator;
@@ -19,14 +20,18 @@ public abstract class Player {
         PlayField.getInstance().registerPlayer(this);
     }
 
-    public abstract void endTurn();
+    public void endTurn() {
+        hasDrawnCard = false;
+    }
 
     /**
      * Adds card from the top of the deck to the hand if the hand doesn't hold the maximum capacity
      */
     public void drawCard () {
-        if(hand.amountOfCardsInHand() < hand.getMAX_CARDS())
+        if(!hasDrawnCard && hand.amountOfCardsInHand() < hand.getMAX_CARDS()) {
             hand.addToHand(deck.popTopCard());
+            hasDrawnCard = true;
+        }
     }
 
     public PlayerPlayFieldMediator getPlayerPlayFieldMediator() {
