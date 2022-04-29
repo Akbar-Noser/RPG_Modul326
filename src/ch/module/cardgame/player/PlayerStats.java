@@ -8,7 +8,7 @@ public class PlayerStats {
 
     public PlayerStats() {
         this.MAX_HEALTH = 100;
-        this.MAX_ENERGY = 20;
+        this.MAX_ENERGY = 15;
         health = MAX_HEALTH;
         energy = MAX_ENERGY;
     }

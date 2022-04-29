@@ -36,7 +36,7 @@ public class PlayerPlayFieldMediator {
         Player defender = getOtherPlayer(initiator);
         int damage = PlayField.getInstance().attackAllOppositeFields(initiator, defender);
         dealDamage(defender, damage);
-        initiator.getStats().incrementEnergyBy(3);
+        initiator.getStats().incrementEnergyBy(2);
     }
 
     /**
