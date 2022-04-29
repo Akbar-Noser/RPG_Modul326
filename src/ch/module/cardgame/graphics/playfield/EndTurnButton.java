@@ -30,7 +30,9 @@ public class EndTurnButton extends JButton {
     private ActionListener getOnClickFunction() {
         return e -> {
             owner.endTurn();
-            owner.getPlayerPlayFieldMediator().getOtherPlayer(owner).endTurn();
+            Player enemy = owner.getPlayerPlayFieldMediator().getOtherPlayer(owner);
+            if (enemy.getStats().getHealth() > 0)
+                enemy.endTurn();
             Board.getInstance().rerender();
         };
     }
