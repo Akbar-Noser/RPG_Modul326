@@ -28,8 +28,8 @@ public class ChoiceMaker {
             return null;
         List<Choice> choices = new ArrayList<>(generateChoices());
         choices = getChoicesWithMinimalDamageTaken(choices);
-        choices = getChoicesWithMaximumDamageDealt(choices);
         choices = getChoicesWithMaximumOfEnemyCardsEliminated(choices);
+        choices = getChoicesWithMaximumDamageDealt(choices);
         choices = getChoicesWithMinimalAmountOfEnergySpent(choices);
         return choices.get(0);
     }
