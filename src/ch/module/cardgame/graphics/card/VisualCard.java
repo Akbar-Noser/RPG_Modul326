@@ -11,9 +11,11 @@ import java.awt.*;
 public class VisualCard extends JPanel {
     private Card card;
     private VisualCardStats visualCardStats;
+    private boolean showCardContent;
 
     public VisualCard(Card card) {
         this.card = card;
+        showCardContent = true;
         visualCardStats = new VisualCardStats(card);
         setPreferredSize(DimensionPresets.CARD_DIMENSIONS);
         setLayout(new BorderLayout());
@@ -23,10 +25,21 @@ public class VisualCard extends JPanel {
         setVisible(true);
     }
 
+    /**
+     * Only shows backside of card and no stats or images are shown.
+     */
+    public void flipCard() {
+        removeAll();
+        showCardContent = false;
+        repaint();
+        revalidate();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(ImageLibrary.CARD_BACKGROUND.getImage(), 0,0, null);
+        if (showCardContent)
+            g.drawImage(ImageLibrary.CARD_BACKGROUND.getImage(), 0,0, null);
     }
 
     public Card getCard() {

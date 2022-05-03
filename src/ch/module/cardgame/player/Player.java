@@ -22,8 +22,10 @@ public abstract class Player {
 
     public void endTurn() {
         hasDrawnCard = false;
+        finalizeEndTurn();
     }
 
+    protected abstract void finalizeEndTurn();
     /**
      * Adds card from the top of the deck to the hand if the hand doesn't hold the maximum capacity
      */
