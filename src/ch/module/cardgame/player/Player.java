@@ -36,10 +36,6 @@ public abstract class Player {
         }
     }
 
-    public PlayerPlayFieldMediator getPlayerPlayFieldMediator() {
-        return playerPlayFieldMediator;
-    }
-
     /**
      * The player plays a card
      *
@@ -67,6 +63,10 @@ public abstract class Player {
 
     public PlayerStats getStats() {
         return stats;
+    }
+
+    public PlayerPlayFieldMediator getPlayerPlayFieldMediator() {
+        return playerPlayFieldMediator;
     }
 
     public PlayerHand getHand() {

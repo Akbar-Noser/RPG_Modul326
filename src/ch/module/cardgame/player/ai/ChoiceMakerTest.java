@@ -2,8 +2,6 @@ package ch.module.cardgame.player.ai;
 
 import ch.module.cardgame.card.Card;
 import ch.module.cardgame.card.CardBuilder;
-import ch.module.cardgame.card.CardField;
-import ch.module.cardgame.field.PlayField;
 import ch.module.cardgame.mediator.PlayerPlayFieldMediator;
 import ch.module.cardgame.player.Player;
 import ch.module.cardgame.player.user.User;
@@ -82,8 +80,8 @@ class ChoiceMakerTest {
         choiceMaker.setFieldsToDefend(List.of(0,1));
         CardBuilder builder = new CardBuilder().setSummonEnergyPoints(3).setAttackPoints(3).setHealthPoints(2);
         Card cardToBePlaced = builder.build();
-        ai.getPlayerPlayFieldMediator().getEnemyPlayfield(ai).get(0).setCard(builder.build());
-        ai.getPlayerPlayFieldMediator().getEnemyPlayfield(ai).get(1).setCard(builder.build());
+        ai.getPlayerPlayFieldMediator().getEnemyPlayField(ai).get(0).setCard(builder.build());
+        ai.getPlayerPlayFieldMediator().getEnemyPlayField(ai).get(1).setCard(builder.build());
         Choice result = choiceMaker.generateChoiceForCardPlacement(Map.of(0, cardToBePlaced));
         assertEquals(1, result.getAmountOfEnemyCardsEliminated());
         assertEquals(0, result.getDamageDealtToEnemy());
@@ -96,18 +94,18 @@ class ChoiceMakerTest {
     @Test
     void getUnprotectedFieldIndices() {
         CardBuilder builder = new CardBuilder().setSummonEnergyPoints(3).setAttackPoints(3).setHealthPoints(2);
-        ai.getPlayerPlayFieldMediator().getEnemyPlayfield(ai).get(0).setCard(builder.build());
-        ai.getPlayerPlayFieldMediator().getEnemyPlayfield(ai).get(1).setCard(builder.build());
-        ai.getPlayerPlayFieldMediator().getPlayfield().get(ai).get(0).setCard(builder.build());
+        ai.getPlayerPlayFieldMediator().getEnemyPlayField(ai).get(0).setCard(builder.build());
+        ai.getPlayerPlayFieldMediator().getEnemyPlayField(ai).get(1).setCard(builder.build());
+        ai.getPlayerPlayFieldMediator().getPlayField().get(ai).get(0).setCard(builder.build());
         assertEquals(List.of(1),choiceMaker.getUnprotectedFieldIndices());
     }
 
     @Test
     void fieldIsUnprotected() {
         CardBuilder builder = new CardBuilder().setSummonEnergyPoints(3).setAttackPoints(3).setHealthPoints(2);
-        ai.getPlayerPlayFieldMediator().getEnemyPlayfield(ai).get(0).setCard(builder.build());
-        ai.getPlayerPlayFieldMediator().getEnemyPlayfield(ai).get(1).setCard(builder.build());
-        ai.getPlayerPlayFieldMediator().getPlayfield().get(ai).get(0).setCard(builder.build());
+        ai.getPlayerPlayFieldMediator().getEnemyPlayField(ai).get(0).setCard(builder.build());
+        ai.getPlayerPlayFieldMediator().getEnemyPlayField(ai).get(1).setCard(builder.build());
+        ai.getPlayerPlayFieldMediator().getPlayField().get(ai).get(0).setCard(builder.build());
         assertFalse(choiceMaker.fieldIsUnprotected(0));
         assertTrue(choiceMaker.fieldIsUnprotected(1));
     }

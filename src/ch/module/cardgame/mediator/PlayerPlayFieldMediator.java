@@ -64,14 +64,14 @@ public class PlayerPlayFieldMediator {
         return successful;
     }
 
-    public Map<Player, List<CardField>> getPlayfield() {
-        return PlayField.getInstance().getCardFields();
-    }
-
-    public List<CardField> getEnemyPlayfield(Player initiator) {
+    public List<CardField> getEnemyPlayField(Player initiator) {
         if (initiator.equals(playerAI))
             return PlayField.getInstance().getCardFields().get(playerUser);
         return PlayField.getInstance().getCardFields().get(playerAI);
+    }
+
+    public Map<Player, List<CardField>> getPlayField() {
+        return PlayField.getInstance().getCardFields();
     }
 
     public void setPlayerUser(Player playerUser) {
