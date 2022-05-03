@@ -2,6 +2,8 @@ package ch.module.cardgame.graphics.player;
 
 import ch.module.cardgame.graphics.text.NumberIndicator;
 import ch.module.cardgame.graphics.utils.ColorPalette;
+import ch.module.cardgame.graphics.utils.DimensionPresets;
+import ch.module.cardgame.graphics.utils.ImageLibrary;
 import ch.module.cardgame.player.Player;
 
 import javax.swing.*;
@@ -18,6 +20,12 @@ public class VisualPlayerStats extends JPanel {
         energy = new NumberIndicator(owner.getStats().getEnergy() + "");
         visualizeStats();
         setVisible(true);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(ImageLibrary.PLAYER_HEALTH_BAR.getImage(), 630,0, null);
     }
 
     private void visualizeStats() {

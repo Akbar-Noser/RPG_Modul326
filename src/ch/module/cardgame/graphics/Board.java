@@ -1,9 +1,6 @@
 package ch.module.cardgame.graphics;
 
 import ch.module.cardgame.field.PlayField;
-import ch.module.cardgame.graphics.cardfield.VisualCardFieldRow;
-import ch.module.cardgame.graphics.hand.VisualHand;
-import ch.module.cardgame.graphics.player.VisualPlayerStats;
 import ch.module.cardgame.graphics.playfield.VisualPlayerSide;
 import ch.module.cardgame.graphics.text.UserMessage;
 import ch.module.cardgame.player.Player;
@@ -12,8 +9,6 @@ import ch.module.cardgame.player.user.User;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
 
 public class Board extends JPanel {
     private static final Board instance = new Board();
