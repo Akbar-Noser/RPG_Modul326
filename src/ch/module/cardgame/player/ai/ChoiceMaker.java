@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ChoiceMaker {
-    private Player client;
+    private final Player client;
     private List<CardField> enemyField;
     private List<CardField> ownField;
     private List<Integer> fieldsToDefend;
@@ -17,8 +17,8 @@ public class ChoiceMaker {
 
     public ChoiceMaker(Player client) {
         this.client = client;
-        this.enemyField = client.getPlayerPlayFieldMediator().getEnemyPlayfield(client);
-        this.ownField = client.getPlayerPlayFieldMediator().getPlayfield().get(client);
+        this.enemyField = client.getPlayerPlayFieldMediator().getEnemyPlayField(client);
+        this.ownField = client.getPlayerPlayFieldMediator().getPlayField().get(client);
     }
 
 
@@ -30,7 +30,7 @@ public class ChoiceMaker {
         choices = getChoicesWithMinimalDamageTaken(choices);
         choices = getChoicesWithMaximumOfEnemyCardsEliminated(choices);
         choices = getChoicesWithMaximumDamageDealt(choices);
-        choices = getChoicesWithMinimalAmountOfEnergySpent(choices);
+        choices = getChoicesWithMinimalEnergySpent(choices);
         return choices.get(0);
     }
 
@@ -64,7 +64,7 @@ public class ChoiceMaker {
      * @param choices the choices which should be evaluated.
      * @return returns a list of choices.
      */
-    public List<Choice> getChoicesWithMinimalAmountOfEnergySpent(List<Choice> choices) {
+    public List<Choice> getChoicesWithMinimalEnergySpent(List<Choice> choices) {
         choices.sort(Comparator.comparing(Choice::getRequiredSummonEnergy));
         if (choices.get(choices.size() - 1).getRequiredSummonEnergy() == 0)
             return choices;

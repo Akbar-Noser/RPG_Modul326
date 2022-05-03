@@ -41,7 +41,7 @@ public class CardCombinator {
      * @param index        the starting index, should be 0 in the most cases
      * @param r            the size of the subset.
      */
-    public static void addCombinationSubsetToList(List<List<Card>> combinations, List<Card> cards, Card[] data, int start,
+    private static void addCombinationSubsetToList(List<List<Card>> combinations, List<Card> cards, Card[] data, int start,
                                                   int end, int index, int r) {
         // Current combination is ready add combination to total combination
         if (index == r) {

@@ -4,7 +4,7 @@ import ch.module.cardgame.mediator.PlayerPlayFieldMediator;
 import ch.module.cardgame.player.Player;
 
 public class EnemyAi extends Player {
-    private ChoiceMaker choiceMaker;
+    private final ChoiceMaker choiceMaker;
 
     public EnemyAi(PlayerPlayFieldMediator playerPlayFieldMediator) {
         super(playerPlayFieldMediator);
