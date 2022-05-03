@@ -10,8 +10,7 @@ public class User extends Player {
     }
 
     @Override
-    public void endTurn() {
-        super.endTurn();
+    public void finalizeEndTurn() {
         playerPlayFieldMediator.endTurn(this);
     }
 }

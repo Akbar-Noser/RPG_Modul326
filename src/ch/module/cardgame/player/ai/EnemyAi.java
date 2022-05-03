@@ -13,8 +13,7 @@ public class EnemyAi extends Player {
     }
 
     @Override
-    public void endTurn() {
-        super.endTurn();
+    public void finalizeEndTurn() {
         makeChoice();
         playerPlayFieldMediator.endTurn(this);
     }

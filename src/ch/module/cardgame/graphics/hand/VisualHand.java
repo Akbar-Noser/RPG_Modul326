@@ -54,6 +54,8 @@ public class VisualHand extends JPanel {
             visualCard.addMouseListener(cardOnClickListener(visualCard));
             if (isEqualToActiveCard(visualCard))
                 visualCard.setBorder(activeCardBorder);
+            if (owner instanceof EnemyAi)
+                visualCard.flipCard();
             add(visualCard);
             add(Box.createHorizontalGlue());
         });
