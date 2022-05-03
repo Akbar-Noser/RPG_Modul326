@@ -3,8 +3,6 @@ package ch.module.cardgame.mediator;
 import ch.module.cardgame.card.Card;
 import ch.module.cardgame.card.CardBuilder;
 import ch.module.cardgame.card.CardField;
-import ch.module.cardgame.card.CardGenerator;
-import ch.module.cardgame.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

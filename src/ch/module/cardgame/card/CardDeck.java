@@ -18,7 +18,7 @@ public class CardDeck {
      */
     private void generate() {
         for (int i = 0; i < MAX_CARDS; i++) {
-            cards.push(CardGenerator.getInstance().generateRandomCard());
+            cards.push(CardFactory.getInstance().generateRandomCard());
         }
     }
 

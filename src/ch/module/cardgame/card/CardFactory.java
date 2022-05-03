@@ -2,13 +2,13 @@ package ch.module.cardgame.card;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class CardGenerator {
+public class CardFactory {
     private final int MAX_HEALTH;
     private final int MAX_ATTACK;
     private final CardBuilder cardBuilder;
-    private static final CardGenerator instance = new CardGenerator();
+    private static final CardFactory instance = new CardFactory();
 
-    public CardGenerator() {
+    public CardFactory() {
         this.MAX_HEALTH = 10;
         this.MAX_ATTACK = 10;
         this.cardBuilder = new CardBuilder();
@@ -19,7 +19,7 @@ public class CardGenerator {
      *
      * @return the instance
      */
-    public static CardGenerator getInstance() {
+    public static CardFactory getInstance() {
         return instance;
     }
 

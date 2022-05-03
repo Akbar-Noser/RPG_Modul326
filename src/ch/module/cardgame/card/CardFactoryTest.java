@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CardGeneratorTest {
-    private final CardGenerator generator = CardGenerator.getInstance();
+class CardFactoryTest {
+    private final CardFactory generator = CardFactory.getInstance();
 
     @Test
     void checkThatSummonEnergyIsCalculatedCorrectly() {

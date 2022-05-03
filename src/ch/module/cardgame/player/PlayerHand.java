@@ -1,7 +1,7 @@
 package ch.module.cardgame.player;
 
 import ch.module.cardgame.card.Card;
-import ch.module.cardgame.card.CardGenerator;
+import ch.module.cardgame.card.CardFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class PlayerHand {
     public PlayerHand() {
         this.cards = new ArrayList<>(MAX_CARDS);
         for (int i = 0; i < 3; i++) {
-            this.cards.add(CardGenerator.getInstance().generateRandomCard());
+            this.cards.add(CardFactory.getInstance().generateRandomCard());
         }
     }
 
