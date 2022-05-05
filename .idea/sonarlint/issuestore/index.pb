@@ -7,8 +7,6 @@ Z
 *src/ch/module/cardgame/card/CardField.java,9\7\970b245c228fbcfdbef6955d9d2a784dbe153dd2
 ]
 -src/ch/module/cardgame/player/PlayerHand.java,4\6\469e25f03678f185b3170b1b85baf62ad1a48f66
-U
-%src/ch/module/cardgame/card/Card.java,7\3\7390ae4374e0b12181b85fd074667a895b4a90b5
 i
 9src/ch/module/cardgame/graphics/card/VisualCardStats.java,5\a\5a49946eb223bedd27097d87b60aab9d40e886df
 Y
@@ -29,9 +27,5 @@ _
 /src/ch/module/cardgame/graphics/GameWindow.java,b\a\ba06839266c353b8080a24265a2a21618671f7d2
 W
 'src/ch/module/cardgame/Application.java,8\b\8b93d84e5d6ba40210d3a6aa232e163632ed8621
-g
-7src/ch/module/cardgame/graphics/utils/ImageLibrary.java,e\9\e90dea9cc9e51e3eb73a14a2a13ca1c53f156710
-k
-;src/ch/module/cardgame/graphics/utils/DimensionPresets.java,9\0\90f85eae116f5a1d3b8054b2ee9308da3088f478
 m
 =src/ch/module/cardgame/graphics/player/VisualPlayerStats.java,b\1\b1680ec9e3573d1d7376600d468e26adc732c37b
