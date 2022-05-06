@@ -1,14 +1,10 @@
 package ch.module.cardgame;
 
-import ch.module.cardgame.graphics.Board;
 import ch.module.cardgame.graphics.GameWindow;
 import ch.module.cardgame.mediator.PlayerPlayFieldMediator;
 import ch.module.cardgame.player.ai.EnemyAi;
 import ch.module.cardgame.player.user.User;
 import ch.module.cardgame.player.Player;
-
-import javax.swing.*;
-import java.awt.*;
 
 public class Application {
 
