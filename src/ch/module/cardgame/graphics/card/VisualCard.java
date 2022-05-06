@@ -19,9 +19,10 @@ public class VisualCard extends JPanel {
         visualCardStats = new VisualCardStats(card);
         setPreferredSize(DimensionPresets.CARD_DIMENSIONS);
         setLayout(new BorderLayout());
-        setBackground(ColorPalette.CARD_BACKGROUND_COLOR);
         setMaximumSize(DimensionPresets.CARD_DIMENSIONS);
         add(visualCardStats, BorderLayout.PAGE_END);
+        repaint();
+        revalidate();
         setVisible(true);
     }
 
@@ -31,6 +32,7 @@ public class VisualCard extends JPanel {
     public void flipCard() {
         removeAll();
         showCardContent = false;
+        setBackground(ColorPalette.CARD_BACKGROUND_COLOR);
         repaint();
         revalidate();
     }
