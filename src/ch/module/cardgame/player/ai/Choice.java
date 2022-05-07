@@ -5,12 +5,12 @@ import ch.module.cardgame.card.Card;
 import java.util.Map;
 
 public class Choice {
-    private Map<Integer, Card> cardsToBePlayed;
-    private int requiredSummonEnergy;
-    private int damageTakenByClient;
-    private int amountOfEnemyCardsEliminated;
-    private int damageDealtToEnemyCards;
-    private int damageDealtToEnemy;
+    private final Map<Integer, Card> cardsToBePlayed;
+    private final int requiredSummonEnergy;
+    private final int damageTakenByClient;
+    private final int amountOfEnemyCardsEliminated;
+    private final int damageDealtToEnemyCards;
+    private final int damageDealtToEnemy;
 
     public Choice(Map<Integer, Card> cardsToBePlayed, int damageTakenByClient, int amountOfEnemyCardsEliminated, int damageDealtToEnemy) {
         this.cardsToBePlayed = cardsToBePlayed;
