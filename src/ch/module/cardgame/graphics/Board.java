@@ -44,9 +44,12 @@ public class Board extends JPanel {
     public void launchWinnerScreen(Player winner) {
         removeAll();
         UserMessage winnerMessage = new UserMessage(winner instanceof User ? "YOU WIN" : "YOU LOSE");
-        winnerMessage.setSize(getWidth(), getHeight());
-        winnerMessage.setFont(new Font(Font.DIALOG, Font.PLAIN, 280));
-        add(winnerMessage);
+        winnerMessage.setPreferredSize(new Dimension(getWidth(), getHeight()));
+        winnerMessage.setVerticalAlignment(SwingConstants.CENTER);
+        winnerMessage.setHorizontalAlignment(SwingConstants.CENTER);
+        winnerMessage.setFont(new Font(Font.DIALOG, Font.PLAIN, 64));
+        setLayout(new BorderLayout());
+        add(winnerMessage, BorderLayout.CENTER);
     }
 
     public void rerender() {
