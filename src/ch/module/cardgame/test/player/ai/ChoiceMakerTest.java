@@ -100,7 +100,7 @@ class ChoiceMakerTest {
         ai.getPlayerPlayFieldMediator().getEnemyPlayField(ai).get(0).setCard(builder.build());
         ai.getPlayerPlayFieldMediator().getEnemyPlayField(ai).get(1).setCard(builder.build());
         ai.getPlayerPlayFieldMediator().getPlayField().get(ai).get(0).setCard(builder.build());
-        assertEquals(List.of(1),choiceMaker.getUnprotectedFieldIndices());
+        assertEquals(List.of(1),choiceMaker.getFieldEvaluator().getUnprotectedFieldIndices());
     }
 
     @Test
@@ -109,7 +109,7 @@ class ChoiceMakerTest {
         ai.getPlayerPlayFieldMediator().getEnemyPlayField(ai).get(0).setCard(builder.build());
         ai.getPlayerPlayFieldMediator().getEnemyPlayField(ai).get(1).setCard(builder.build());
         ai.getPlayerPlayFieldMediator().getPlayField().get(ai).get(0).setCard(builder.build());
-        assertFalse(choiceMaker.fieldIsUnprotected(0));
-        assertTrue(choiceMaker.fieldIsUnprotected(1));
+        assertFalse(choiceMaker.getFieldEvaluator().fieldIsUnprotected(0));
+        assertTrue(choiceMaker.getFieldEvaluator().fieldIsUnprotected(1));
     }
 }

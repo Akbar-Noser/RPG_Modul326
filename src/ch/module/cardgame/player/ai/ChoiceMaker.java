@@ -14,17 +14,19 @@ public class ChoiceMaker {
     private List<CardField> ownField;
     private List<Integer> fieldsToDefend;
     private List<Integer> openFields;
+    private final FieldEvaluator fieldEvaluator;
 
     public ChoiceMaker(Player client) {
         this.client = client;
         this.enemyField = client.getPlayerPlayFieldMediator().getEnemyPlayField(client);
         this.ownField = client.getPlayerPlayFieldMediator().getPlayField().get(client);
-        this.openFields = getIndicesOfOpenFields();
+        this.fieldEvaluator = new FieldEvaluator(ownField, enemyField);
+        this.openFields = fieldEvaluator.getIndicesOfOpenFields();
     }
 
 
     public Choice getOptimalChoice() {
-        fieldsToDefend = getUnprotectedFieldIndices();
+        fieldsToDefend = fieldEvaluator.getUnprotectedFieldIndices();
         if (fieldsToDefend.isEmpty())
             return null;
         List<Choice> choices = new ArrayList<>(generateChoices());
@@ -205,47 +207,16 @@ public class ChoiceMaker {
         return new Choice(cardsToBePlaced, damageTakenByClient, amountOfEnemyCardsEliminated, damageDealtToEnemy);
     }
 
-    /**
-     * Gets the field indices where there is an enemy card and no own card to block it.
-     *
-     * @return the unprotected indices.
-     */
-    public List<Integer> getUnprotectedFieldIndices() {
-        List<Integer> unprotectedFields = new ArrayList<>(PlayField.getMaxAmountCardFields());
-        for (int i = 0; i < enemyField.size(); i++) {
-            if (fieldIsUnprotected(i))
-                unprotectedFields.add(i);
-        }
-
-        return unprotectedFields;
-    }
-
-    /**
-     * Checks if a field is unprotected
-     *
-     * @param index the index of the field to be checked
-     * @return a boolean value which expresses if the field is unprotected.
-     */
-    public boolean fieldIsUnprotected(int index) {
-        CardField enemyCardField = enemyField.get(index);
-        return enemyCardField.getCard() != null && ownField.get(index).getCard() == null && enemyCardField.getCard().getAttackPoints() > 0;
-    }
-
-    private List<Integer> getIndicesOfOpenFields() {
-        List<Integer> indices = new ArrayList<>(PlayField.getMaxAmountCardFields());
-        for (int i = 0; i < ownField.size(); i++) {
-            if (ownField.get(i).getCard() == null)
-                indices.add(i);
-        }
-        return indices;
-    }
-
     public void setEnemyField(List<CardField> enemyField) {
         this.enemyField = enemyField;
     }
 
     public void setOwnField(List<CardField> ownField) {
         this.ownField = ownField;
+    }
+
+    public FieldEvaluator getFieldEvaluator() {
+        return fieldEvaluator;
     }
 
     public void setFieldsToDefend(List<Integer> fieldsToDefend) {
