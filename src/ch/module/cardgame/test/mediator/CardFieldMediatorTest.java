@@ -1,8 +1,9 @@
-package ch.module.cardgame.mediator;
+package ch.module.cardgame.test.mediator;
 
 import ch.module.cardgame.card.Card;
 import ch.module.cardgame.card.CardBuilder;
 import ch.module.cardgame.card.CardField;
+import ch.module.cardgame.mediator.CardFieldMediator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

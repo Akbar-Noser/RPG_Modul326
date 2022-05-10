@@ -19,6 +19,7 @@ public class ChoiceMaker {
         this.client = client;
         this.enemyField = client.getPlayerPlayFieldMediator().getEnemyPlayField(client);
         this.ownField = client.getPlayerPlayFieldMediator().getPlayField().get(client);
+        this.openFields = getIndicesOfOpenFields();
     }
 
 
@@ -130,7 +131,6 @@ public class ChoiceMaker {
      * @return a linked list of all the choice objects.
      */
     public List<Choice> generateChoices() {
-        openFields = getIndicesOfOpenFields();
         List<List<Card>> cardCombinations = CardCombinator.getUniqueCombinationsOfCards(client.getHand().getCards());
         cardCombinations = filterImpossibleCombinations(cardCombinations);
         List<int[]> possiblePositionsForCards = new LinkedList<>();

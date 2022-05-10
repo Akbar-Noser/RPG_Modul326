@@ -1,5 +1,7 @@
-package ch.module.cardgame.card;
+package ch.module.cardgame.test.card;
 
+import ch.module.cardgame.card.Card;
+import ch.module.cardgame.card.CardBuilder;
 import jdk.jfr.Label;
 import org.junit.jupiter.api.Test;
 

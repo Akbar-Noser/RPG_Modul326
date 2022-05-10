@@ -1,7 +1,9 @@
-package ch.module.cardgame.player.ai;
+package ch.module.cardgame.test.player.ai;
 
 import ch.module.cardgame.card.Card;
 import ch.module.cardgame.card.CardBuilder;
+import ch.module.cardgame.player.ai.CardCombinator;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +37,7 @@ class CardCombinatorTest {
                 List.of(card1, card3),
                 List.of(card2, card3)
         );
-        assertEquals(uniqueCombinations, CardCombinator.getUniqueCombinationsOfCards(cards));
+        Assertions.assertEquals(uniqueCombinations, CardCombinator.getUniqueCombinationsOfCards(cards));
     }
 
     @Test

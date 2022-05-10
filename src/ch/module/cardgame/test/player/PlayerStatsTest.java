@@ -1,5 +1,6 @@
-package ch.module.cardgame.player;
+package ch.module.cardgame.test.player;
 
+import ch.module.cardgame.player.PlayerStats;
 import org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

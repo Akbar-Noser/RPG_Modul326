@@ -1,5 +1,7 @@
-package ch.module.cardgame.card;
+package ch.module.cardgame.test.card;
 
+import ch.module.cardgame.card.Card;
+import ch.module.cardgame.card.CardDeck;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

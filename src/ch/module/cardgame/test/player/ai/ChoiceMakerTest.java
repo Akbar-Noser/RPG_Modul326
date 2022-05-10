@@ -1,9 +1,12 @@
-package ch.module.cardgame.player.ai;
+package ch.module.cardgame.test.player.ai;
 
 import ch.module.cardgame.card.Card;
 import ch.module.cardgame.card.CardBuilder;
 import ch.module.cardgame.mediator.PlayerPlayFieldMediator;
 import ch.module.cardgame.player.Player;
+import ch.module.cardgame.player.ai.Choice;
+import ch.module.cardgame.player.ai.ChoiceMaker;
+import ch.module.cardgame.player.ai.EnemyAi;
 import ch.module.cardgame.player.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
